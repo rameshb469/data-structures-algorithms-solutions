@@ -1,18 +1,18 @@
 package ds.linkedlist;
 
-import static ds.linkedlist.Node.print;
+import org.junit.jupiter.api.Test;
+import org.mockito.InjectMocks;
 
-public class RemovingDuplicateInUnSortedLLTest {
+import static ds.linkedlist.LinkedListMasterData.EMPTY_LINKED_LIST;
+import static org.junit.jupiter.api.Assertions.assertEquals;
 
-    public static void main(String[] args) {
-        Node head = new Node(3);
-        head.next = new Node(3);
-        head.next.next = new Node(4);
-        head.next.next.next = new Node(3);
+class RemovingDuplicateInUnSortedLLTest {
 
-        System.out.println("Before removing duplicates....... ");
-        print(head);
-        System.out.println("After removing duplicates....... ");
-        print(RemovingDuplicateInUnSortedLL.removingDuplicatesInUnSortedLLByUsingBuffer(head));
+    @InjectMocks
+    RemovingDuplicateInUnSortedLL inUnSortedLL;
+
+    @Test
+    public void testWithEmptyLinkedList() {
+        assertEquals(inUnSortedLL.removeDuplicateWithoutBuffer(EMPTY_LINKED_LIST), null);
     }
 }
