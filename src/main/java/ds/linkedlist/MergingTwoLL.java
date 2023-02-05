@@ -188,18 +188,9 @@ public class MergingTwoLL {
         Node currentNodeOne = linkedListOne;
         Node currentNodeTwo = linkedListTwo;
 
-        while (currentNodeOne != currentNodeTwo){
-            if (currentNodeOne == null){
-                currentNodeOne = linkedListTwo;
-            } else {
-                currentNodeOne = currentNodeOne.next;
-            }
-
-            if (currentNodeTwo == null){
-                currentNodeTwo = linkedListOne;
-            } else {
-                currentNodeTwo = currentNodeTwo.next;
-            }
+        if(currentNodeOne != currentNodeTwo){
+            currentNodeOne = (currentNodeOne == null) ? linkedListTwo : currentNodeOne.next;
+            currentNodeTwo = (currentNodeTwo == null) ? linkedListOne : currentNodeTwo.next;
         }
         return currentNodeOne;
     }
