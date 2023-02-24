@@ -8,22 +8,22 @@ import java.util.List;
  */
 public class MorrisTraversal {
 
-    public static List<Integer> inOrder(BinaryTree root){
+    public static List<Integer> inOrder(BinaryTree root) {
         List<Integer> results = new ArrayList<>();
         BinaryTree currentNode = root;
 
         while (currentNode != null) {
 
-            if (currentNode.left ==null) {
+            if (currentNode.left == null) {
                 results.add(currentNode.value);
                 currentNode = currentNode.right;
             } else {
                 BinaryTree prevNode = currentNode.left;
-                while (prevNode != null && prevNode != currentNode){
+                while (prevNode != null && prevNode.right != currentNode) {
                     prevNode = prevNode.right;
                 }
 
-                if (prevNode.right == null){
+                if (prevNode.right == null) {
                     prevNode.right = currentNode;
                     currentNode = currentNode.left;
                 } else {
@@ -34,6 +34,8 @@ public class MorrisTraversal {
             }
         }
 
-        return  results;
+        return results;
     }
+
+
 }

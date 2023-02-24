@@ -1,7 +1,5 @@
 package ds.binarytree;
 
-import ds.linkedlist.Node;
-
 import java.util.LinkedList;
 import java.util.Queue;
 
@@ -43,16 +41,16 @@ public class MaxDepthOfBinaryTree {
         Queue<BinaryTree> queue = new LinkedList<>();
         queue.add(tree);
         int height = 0;
-        while (!queue.isEmpty()){
+        while (!queue.isEmpty()) {
             int size = queue.size();
             for (int i = 0; i < size; i++) {
                 BinaryTree tempNode = queue.poll();
 
-                if (tempNode.left != null){
+                if (tempNode.left != null) {
                     queue.add(tempNode.left);
                 }
 
-                if (tempNode.right != null){
+                if (tempNode.right != null) {
                     queue.add(tempNode.right);
                 }
             }
@@ -63,7 +61,7 @@ public class MaxDepthOfBinaryTree {
 
     /**
      * Follow the below steps to Implement the idea:
-     *
+     * <p>
      * Traverse the tree in level order traversal starting from root.
      * Initialize an empty queue Q, a variable depth and push root, then push null into the Q.
      * Run a while loop till Q is not empty.
@@ -71,35 +69,35 @@ public class MaxDepthOfBinaryTree {
      * If the front of Q is NULL then increment depth by one and if queue is not empty then push NULL into the Q.
      * Else if the element is not NULL then check for its left and right children and if they are not NULL push them into Q.
      * Return depth.
-     * 
+     *
      * @param tree
      * @return
      */
-    public static int maxDepthWithQueueNull(BinaryTree tree){
-       Queue<BinaryTree> queue = new LinkedList<>();
-       queue.add(tree);
-       queue.add(null);
-       int depth = 0;
-       
-       while (!queue.isEmpty()){
-           BinaryTree tempNode = queue.poll();
-           if (tempNode == null) {
-               depth++;
-           }
+    public static int maxDepthWithQueueNull(BinaryTree tree) {
+        Queue<BinaryTree> queue = new LinkedList<>();
+        queue.add(tree);
+        queue.add(null);
+        int depth = 0;
 
-           if (tempNode != null){
-               if (tempNode.left != null){
-                   queue.add(tempNode.left);
-               }
+        while (!queue.isEmpty()) {
+            BinaryTree tempNode = queue.poll();
+            if (tempNode == null) {
+                depth++;
+            }
 
-               if (tempNode.right != null){
-                   queue.add(tempNode.right);
-               }
-           } else if (!queue.isEmpty()) {
-               queue.add(null);
-           }
-       }
-       return depth;
+            if (tempNode != null) {
+                if (tempNode.left != null) {
+                    queue.add(tempNode.left);
+                }
+
+                if (tempNode.right != null) {
+                    queue.add(tempNode.right);
+                }
+            } else if (!queue.isEmpty()) {
+                queue.add(null);
+            }
+        }
+        return depth;
     }
 
     public static void main(String[] args) {
