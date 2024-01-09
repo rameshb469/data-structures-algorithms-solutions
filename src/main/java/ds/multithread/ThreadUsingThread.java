@@ -1,6 +1,6 @@
 package ds.multithread;
 
-import algorithms.Singleton;
+import ds.Singleton;
 
 public class ThreadUsingThread extends Thread {
 
