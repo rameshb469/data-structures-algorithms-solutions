@@ -13,9 +13,15 @@ public class HouseThiefProblem {
     }
 
     public static int dpBottomToTopApproach(int[] houses){
-        int[] dp = new int[houses.length+1];
 
-        return 0;
+        int n = houses.length;
+        int[] dp = new int[n+1];
+
+        for (int i = n; i >= 0 ; i--) {
+            dp[i] = Math.max(houses[i]+dp[i+2], dp[i+1]);
+        }
+
+        return dp[0];
     }
 
     public static int dpTopDownApproach(int[] houses, int index, int[] dp){

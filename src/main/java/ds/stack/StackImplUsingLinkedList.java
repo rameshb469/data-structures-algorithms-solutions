@@ -1,6 +1,7 @@
 package ds.stack;
 
-import algorithms.linkedlist.Node;
+
+import ds.linkedlist.Node;
 
 public class StackImplUsingLinkedList {
 
@@ -15,7 +16,7 @@ public class StackImplUsingLinkedList {
     public int pop(){
         if (isEmpty()) throw new RuntimeException("Stack is Empty");
 
-        int value = head.data;
+        int value = head.value;
         head = head.next;
         return value;
     }
@@ -23,7 +24,7 @@ public class StackImplUsingLinkedList {
     public int peek(){
         if (isEmpty()) throw new RuntimeException("Stack is Empty");
 
-        return head.data;
+        return head.value;
     }
 
     public void delete(){

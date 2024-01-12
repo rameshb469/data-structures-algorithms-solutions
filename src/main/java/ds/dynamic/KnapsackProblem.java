@@ -21,6 +21,28 @@ public class KnapsackProblem {
         return knapsack(profits, weights, capacity, 0);
     }
 
+    public static int knapsackMemoization(int[][] dp, int[] profits, int[] weights, int capacity, int currentIndex){
+
+        if (capacity <=0 || currentIndex>= profits.length){
+            return 0;
+        }
+
+        if (dp[currentIndex][capacity] == 0){
+            // if we pick the current value
+            int p1 = 0;
+            if (weights[currentIndex] <= capacity){
+                p1 = profits[currentIndex]+knapsackMemoization(dp, profits, weights, capacity-weights[currentIndex], currentIndex+1);
+            }
+
+            // if not picking the current value
+            int p2 = knapsackMemoization(dp, profits, weights, capacity, currentIndex+1);
+
+            dp[currentIndex][capacity] = Math.max(p1, p2);
+        }
+
+        return dp[currentIndex][capacity];
+    }
+
     /**
      * Knapsack problem
      *
@@ -60,5 +82,9 @@ public class KnapsackProblem {
         int knapsack = 7;
 
         System.out.println(knapsack(profits, weights, knapsack));
+
+        int[][] dp = new int[profits.length+1][knapsack+1];
+        System.out.println("using memoization"
+                +knapsackMemoization(dp,profits,weights,knapsack, 0));
     }
 }
