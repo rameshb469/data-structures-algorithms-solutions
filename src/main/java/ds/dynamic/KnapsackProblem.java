@@ -21,6 +21,38 @@ public class KnapsackProblem {
         return knapsack(profits, weights, capacity, 0);
     }
 
+    public static int knapsackBottomUpApproach(int[] profits, int[] weights, int capacity){
+
+        int N = profits.length;
+        int W = capacity;
+
+        // dp[i] = max(profits[i]+dp[i+1], dp[i+1])
+        //         1 2 3 4 5 ..... capacity
+        //   -------------------------------------------
+        //     1  |
+        //     2  |
+        //     3  |
+        //     e  |
+
+        int[][] dp = new int[N+1][W+1];
+
+        for (int i = N-1; i >= 0 ; i--) {
+            for (int j = W-1; j >= 0 ; j--) {
+
+                int p1 = 0;
+                if (j >= weights[i]){
+                    p1 = profits[i]+dp[i+1][j-weights[i]];
+                }
+
+                int p2 = dp[i+1][j];
+
+                dp[i][j] = Math.max(p1, p2);
+            }
+        }
+
+        return dp[0][W-1];
+    }
+
     public static int knapsackMemoization(int[][] dp, int[] profits, int[] weights, int capacity, int currentIndex){
 
         if (capacity <=0 || currentIndex>= profits.length){
@@ -86,5 +118,8 @@ public class KnapsackProblem {
         int[][] dp = new int[profits.length+1][knapsack+1];
         System.out.println("using memoization"
                 +knapsackMemoization(dp,profits,weights,knapsack, 0));
+
+
+        System.out.println("Using Bottomup approach: "+knapsackBottomUpApproach(profits, weights, knapsack));
     }
 }
