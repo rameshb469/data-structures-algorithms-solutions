@@ -77,6 +77,6 @@ public class NodeSwap {
             currentNode = currentNode.next;
         }
 
-        return null;
+        return head;
     }
 }
