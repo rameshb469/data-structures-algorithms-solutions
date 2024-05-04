@@ -1,5 +1,6 @@
 package ds.sliding_window;
 
+import java.util.Arrays;
 import java.util.Collections;
 import java.util.HashMap;
 import java.util.Map;
@@ -38,7 +39,7 @@ import java.util.Map;
 public class MinWindowSubString {
 
     public static void main(String[] args) {
-        System.out.println(minWindow("ADOBECODEBANC", "ABC"));
+        System.out.println(minWindow2("ADOBECODEBANC", "ABC"));
     }
 
     public static String minWindow(String s, String t) {
@@ -46,10 +47,13 @@ public class MinWindowSubString {
         if (t.isEmpty()) return "";
 
         Map<Character, Integer> tMap = new HashMap<>();
-        for (int i = 0; i < t.length(); i++) {
-            tMap.put(t.charAt(i), 1+tMap.getOrDefault(t.charAt(i), 0));
-        }
         Map<Character, Integer> sMap = new HashMap<>();
+        for (int i = 0; i < t.length(); i++) {
+            char curr = t.charAt(i);
+            tMap.put(curr, 1+tMap.getOrDefault(t.charAt(i), 0));
+            sMap.put(curr, 0);
+        }
+
         
 
         int windowStart = 0;
@@ -87,6 +91,54 @@ public class MinWindowSubString {
             }
         }
 
+        return true;
+    }
+
+    public static String minWindow2(String s, String t) {
+
+        int[] sMap = new int[128];
+        int[] tMap = new int[128];
+
+        for(char curr : t.toCharArray()){
+            tMap[curr]++;
+        }
+
+        int windowStart = 0;
+        int resLength = Integer.MAX_VALUE;
+        String res = "";
+
+        for (int windowEnd = 0; windowEnd < s.length(); windowEnd++) {
+            char curr = s.charAt(windowEnd);
+
+            if (tMap[curr] > 0){
+                sMap[curr]++;
+            }
+
+            while (containsAll(sMap, t)){
+                int windowLength = windowEnd-windowStart+1;
+                if (resLength > windowLength){
+                    res = s.substring(windowStart, windowEnd+1);
+                    resLength = windowLength;
+                }
+
+                char startChar = s.charAt(windowStart++);
+                if (sMap[startChar] > 0){
+                    sMap[startChar]--;
+                }
+            }
+        }
+
+        return res;
+    }
+
+    private static boolean containsAll(int[] sMap,
+                                       String t){
+        
+        for ( char curr : t.toCharArray()){
+            if (sMap[curr] <= 0){
+                return false;
+            }
+        }
         return true;
     }
 

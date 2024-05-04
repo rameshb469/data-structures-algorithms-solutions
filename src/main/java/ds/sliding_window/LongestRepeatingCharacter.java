@@ -30,4 +30,39 @@ public class LongestRepeatingCharacter {
         return  maxCount;
 
     }
+
+    public static int longestRepeatingCharacter2(String s, int k){
+
+        int[] charArray = new int[26];
+
+        int windowStart = 0;
+
+        int res = Integer.MIN_VALUE;
+        for (int windowEnd = 0; windowEnd < s.length(); windowEnd++) {
+            char curr = s.charAt(windowEnd);
+            charArray[curr - 'A']++;
+            int maxCharCount = maxCount(charArray);
+            while ((windowEnd-windowStart+1)-maxCharCount > k){
+                char startChar = s.charAt(windowStart);
+                charArray[startChar - 'A']--;
+                windowStart++;
+            }
+
+            res = Math.max(res, (windowEnd-windowStart+1));
+        }
+        return res == Integer.MIN_VALUE ? 0 : res;
+    }
+
+    private static int maxCount(int[] array){
+        int max = array[0];
+        for (int i = 1; i < array.length; i++) {
+            max = Math.max(max, array[i]);
+        }
+
+        return max;
+    }
+
+    public static void main(String[] args) {
+        System.out.println(longestRepeatingCharacter2("AABABBA", 1));
+    }
 }

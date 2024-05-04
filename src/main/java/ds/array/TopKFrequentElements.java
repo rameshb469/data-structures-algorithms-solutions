@@ -48,6 +48,9 @@ public class TopKFrequentElements {
     }
 
     public static void main(String[] args) {
-        System.out.println(topKFrequent(new int[]{1,1,1,2,2,3}, 2));
+        int[] res = topKFrequent(new int[]{1,1,1,1,4,4,4,2,2,2,3}, 2);
+        for (int value : res){
+            System.out.println(value);
+        }
     }
 }
