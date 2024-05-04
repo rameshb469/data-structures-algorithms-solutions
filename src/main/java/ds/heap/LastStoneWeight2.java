@@ -47,5 +47,7 @@ public class LastStoneWeight2 {
         while (queue.size() > 1){
 
         }
+
+        return 0;
     }
 }
